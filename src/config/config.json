@@ -1,0 +1,8 @@
+{
+    "apiEndpoints": {
+        "reviews": "http://localhost:1337/api/reviews",
+        "reviewDetails": "http://localhost:1337/api/reviews",
+        "categories": "http://localhost:1337/api/categories",
+        "users": "http://localhost:1337/api/users"
+    }
+}
