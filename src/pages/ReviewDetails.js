@@ -1,29 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client'
 import { useParams } from 'react-router-dom';
-
-const REVIEW = gql`
-  query GetReview($id: ID!) { 
-    review(id: $id) {
-      data {
-        id,
-        attributes {
-          Title,
-          Body,
-          Rating,
-          categories {
-            data {
-              id,
-              attributes {
-                Name
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+import { REVIEW } from '../graphql/gueries'
 
 export default function ReviewDetails() {
   const { id } = useParams();

@@ -3,29 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { useQuery, gql } from '@apollo/client'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-
-const REVIEWS = gql`
-  query GetReviews {
-    reviews {
-      data {
-        id,
-        attributes {
-          Title,
-          Body,
-          Rating,
-          categories {
-            data {
-              id,
-              attributes {
-                Name
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+import { REVIEWS } from '../graphql/gueries'
 
 export default function Homepage() {
   const { loading, error, data } = useQuery(REVIEWS);
@@ -35,7 +13,6 @@ export default function Homepage() {
 
   useEffect(() => {
     if (d){
-      console.log('teste')
       const projection = d.map((d) => (
         {
           Id: d.id,
@@ -62,7 +39,6 @@ export default function Homepage() {
   if (error) return <p>Error: :(</p>
 
   const handleDescriptionExpand = (e) => {
-    console.log(thing[0])
     thing.find((r) => r.Id === e.target.value).Expand = !thing.find((r) => r.Id === e.target.value).Expand;
     setThing(thing)
     setExpandClicked(prev => !prev)

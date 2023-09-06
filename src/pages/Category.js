@@ -1,37 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useQuery, gql } from '@apollo/client'
 import { useParams, Link } from 'react-router-dom';
-
-const CATEGORY = gql`
-  query GetCategory($id: ID!) {
-    category(id: $id) {
-      data {
-        id,
-        attributes {
-          Name,
-          reviews {
-            data {
-              id,
-              attributes {
-                Title,
-                Rating,
-                Body,
-                categories {
-                  data {
-                    id,
-                    attributes {
-                      Name
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+import { CATEGORY } from '../graphql/gueries'
 
 export default function Category() {
   const { id } = useParams();
@@ -41,7 +11,6 @@ export default function Category() {
   const [category, setCategory] = useState(null);
   const [thing, setThing] = useState(null);
   const [expandClicked, setExpandClicked] = useState(false);
-  console.log("data", data)
   const d = data?.category?.data;
 
   useEffect(() => {
@@ -102,15 +71,6 @@ export default function Category() {
               <p>{review.Description}<button className="review-desc-button" onClick={handleDescriptionExpand} value={review.Id}>^</button></p>
             }          
           </div>
-          // <div key={d.Id}>{d.Title}</div>
-          // {d.Categories.map(c => (
-          //   <small key={c.Id}>{c.Name}</small>
-          // ))}
-
-          // {console.log(d)}
-          // {d.Categories.map(c => (
-          //   <div key={c.Id}>{c.Name}</div>
-          // ))}
       ))}
     </>
   )

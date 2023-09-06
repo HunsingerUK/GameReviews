@@ -1,24 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery, gql } from '@apollo/client'
-
-const CATEGORIES = gql`
-  query GetCategories {
-    categories {
-      data {
-        id,
-        attributes {
-          Name
-        }
-      }
-    }
-  }
-`
+import { CATEGORIES } from '../graphql/gueries'
 
 export default function SiteHeader() {
   const { loading, error, data } = useQuery(CATEGORIES);
   const [categories, setCategories] = useState(null);
-  console.log(data)
 
   useEffect(() => {
     let graphQlData = [];
@@ -36,8 +23,6 @@ export default function SiteHeader() {
   if (loading) return <p>Loading Categories...</p>;
 
   if (error) return <p>Error fetching Categories</p>
-
-  console.log(categories)
 
   return (
     <div className='site-header'>
